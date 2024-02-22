@@ -1,3 +1,6 @@
+"""
+该脚本用于遍历根目录及各级子文件夹下所有html文件，实现特定字符串替换
+"""
 import os
 
 def replace_in_file(file_path, old_string, new_string):
