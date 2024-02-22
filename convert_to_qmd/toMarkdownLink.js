@@ -6,9 +6,9 @@ module.exports = toMarkdownLink;
  */
 function toMarkdownLink(text) {
   // TODO: 调用 obsidian 的 API 获取附件默认存放路径，而不是直接添加 "./attachments/"
-  text = text.replace(/!\[\[([^\|]+?\.(?:png|jpg))\]\]/, "![](./assets/$1)");
+  text = text.replace(/!\[\[([^\|]+?\.(?:png|jpg))\]\]/g, "![](./assets/$1)");
   text = text.replace(
-    /!\[\[([^\|]+?\.(?:png|jpg))\|(.+?)\]\]/,
+    /!\[\[([^\|]+?\.(?:png|jpg))\|(.+?)\]\]/g,
     "![$2](./assets/$1)"
   );
   return text;
