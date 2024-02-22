@@ -17,7 +17,7 @@ function colConvertFull(fullText) {
  * @returns {string} qmd文件的分栏语法块
  */
 function colConvertPart(matchArr) {
-  //用于匹配 Multi-Column Markdown插件分栏语法的正则表达式
+  //用于匹配 Multi-Column Markdown插件分栏语法的正则表达式 TODO: 优化正则表达式
   const partText = matchArr[0]; // partText是正则表达式的匹配结果，partText[0]是匹配组，区别于捕获组
   const regexStart =
     /---\s*start-multi-column: *?(.*)\n```column-settings.*?\n([\s\S]*?)\n``` *?\n/;
