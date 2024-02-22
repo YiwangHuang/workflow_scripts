@@ -5,8 +5,15 @@ module.exports = toMarkdownLink;
  * @returns
  */
 function toMarkdownLink(text) {
-  text.replace(/!\[\[([^\|]+?\.(?:png|jpg))\]\]/, "![]($1)");
-  text.replace(/!\[\[([^\|]+?\.(?:png|jpg))\|(.+?)\]\]/, "![$2]($1)");
+  // TODO: 调用 obsidian 的 API 获取附件默认存放路径，而不是直接添加 "./attachments/"
+  text = text.replace(
+    /!\[\[([^\|]+?\.(?:png|jpg))\]\]/,
+    "![](./attachments/$1)"
+  );
+  text = text.replace(
+    /!\[\[([^\|]+?\.(?:png|jpg))\|(.+?)\]\]/,
+    "![$2](./attachments/$1)"
+  );
   return text;
 }
 /**两种格式相互转换的正则表达式
@@ -18,3 +25,14 @@ function toMarkdownLink(text) {
  * "!\[\]\(([^\|]+?\.(?:png|jpg))\)"->"![[$1]]"
  * "!\[(.+?)\]\(([^\|]+?\.(?:png|jpg))\)"->"![[$2|$1]]"
  */
+if (require.main === module) {
+  const fs = require("fs");
+  let data;
+  try {
+    //同步读取文件，同步方法会阻塞 Node.js 事件循环，直到文件操作完成
+    data = fs.readFileSync("convert_to_qmd\\toMarkdownLinksText.md", "utf8");
+  } catch (err) {
+    console.error(err);
+  }
+  console.log(toMarkdownLink(data));
+}
