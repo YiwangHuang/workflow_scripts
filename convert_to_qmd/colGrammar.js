@@ -6,8 +6,7 @@ const segmentSelect = require("./selectFun.js");
  * @returns 处理后的文本（全文）
  */
 function colConvertFull(fullText) {
-  const reg =
-    /--- *?start-multi-column((?:.|[\r\n])*?)--- *?end-multi-column.*/g;
+  const reg = /---\s*start-multi-column([\s\S]*?)---\s*end-multi-column\.*/g; //TODO:
   const convertedText = segmentSelect(fullText, reg, colConvertPart);
   return convertedText;
 }
@@ -21,20 +20,20 @@ function colConvertPart(matchArr) {
   //用于匹配 Multi-Column Markdown插件分栏语法的正则表达式
   const partText = matchArr[0]; // partText是正则表达式的匹配结果，partText[0]是匹配组，区别于捕获组
   const regexStart =
-    /--- *?start-multi-column: *?(.*)\n```column-settings.*?\n((?:.|[\r\n])*?)\n``` *?\n/;
+    /---\s*start-multi-column: *?(.*)\n```column-settings.*?\n([\s\S]*?)\n``` *?\n/;
   const regexBreak = /((?:.|[\r\n])*?)\n *?--- *?column-break *?--- *?/;
   const regexEnd = /((?:.|[\r\n])*?)\n *?--- *?end-multi-column.*?/;
 
   // 从文本中提取分栏属性并以键值对的形式存储
   const colProp = {};
   const colProp_ = {};
-  const colNumList = ["Number_of_Columns", "Num_of_Cols", "Col_Count"];
+  const colNumList = ["number_of_columns", "num_of_cols", "col_count"];
   const colSizeList = [
-    "Column_Size",
-    "Col_Size",
-    "Column_Width",
-    "Col_Width",
-    "Largest_Column",
+    "column_size",
+    "col_size",
+    "column_width",
+    "col_width",
+    "largest_column",
   ];
   const matches = partText.match(regexStart);
 
@@ -45,7 +44,7 @@ function colConvertPart(matchArr) {
     columnSettings.forEach((line) => {
       const [key, value] = line.split(":");
       //把分栏属性名中的空格" "替换成下划线"_"，将属性名和属性值一键值对的形式存入mcProp_
-      colProp_[key.trim().replace(/ /g, "_")] = value.trim();
+      colProp_[key.trim().replace(/\s/g, "_").toLowerCase()] = value.trim();
     });
     for (let i in colNumList) {
       if (colProp_.hasOwnProperty(colNumList[i])) {
@@ -142,7 +141,7 @@ if (require.main === module) {
   let data;
   try {
     //同步读取文件，同步方法会阻塞 Node.js 事件循环，直到文件操作完成
-    data = fs.readFileSync("待处理文本.md", "utf8");
+    data = fs.readFileSync("convert_to_qmd/待处理文本.md", "utf8");
   } catch (err) {
     console.error(err);
   }

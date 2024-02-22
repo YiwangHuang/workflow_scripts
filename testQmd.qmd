@@ -1,0 +1,39 @@
+abc
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+1
+:::
+
+::: {.column width="30%"}  
+
+2
+
+:::
+
+::: {.column width="20%"}  
+
+3
+:::
+::::
+  
+123
+
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+Text displayed in column 1.
+
+:::
+
+::: {.column width="30%"}
+
+Text displayed in column 2.
+
+:::
+::::
+
