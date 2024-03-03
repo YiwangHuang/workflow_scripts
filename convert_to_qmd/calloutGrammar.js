@@ -13,6 +13,12 @@ function callConvertPart(matchArr) {
   const calloutTitle = matchArr[2].trim();
   const calloutText = matchArr[3];
   const contentArr = [];
+
+  // info类的callout是面向教师的组织课堂的建议，因此不导出到qmd文件中
+  if (calloutType == "info") {
+    return "\n";
+  }
+
   const regex = /^>(.*)$/gm; // 多行模式标志/m来匹配每一行的开头，而不是整个文本的开头
   let match;
   while ((match = regex.exec(calloutText)) !== null) {
