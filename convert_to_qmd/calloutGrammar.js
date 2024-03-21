@@ -39,7 +39,7 @@ if (require.main === module) {
   let data;
   try {
     //同步读取文件，同步方法会阻塞 Node.js 事件循环，直到文件操作完成
-    data = fs.readFileSync("calloutText.md", "utf8");
+    data = fs.readFileSync("convert_to_qmd/calloutText.md", "utf8");
   } catch (err) {
     console.error(err);
   }
