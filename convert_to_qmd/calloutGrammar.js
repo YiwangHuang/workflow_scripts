@@ -3,7 +3,7 @@ const segmentSelect = require("./selectFun.js");
 module.exports = { callConvertFull: callConvertFull };
 
 function callConvertFull(fullText) {
-  const regex = /^> *?\[!(.+)\][\+\-]{0,1}(.*)\n((?:>.*\n)*)/gm;
+  const regex = /^[\t ]*> *?\[!(.+)\][\+\-]{0,1}(.*)\n((?:>.*\n)*)/gm;
   return segmentSelect(fullText, regex, callConvertPart);
   // return callConvertPart(regex.exec(fullText));
 }

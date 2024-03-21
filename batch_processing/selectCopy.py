@@ -7,7 +7,7 @@ def copy_assets(source_file_path, destination_folder):
     source_folder = os.path.dirname(source_file_path)
 
     # 在指定地址新建一个文件夹B
-    destination_folder_path = os.path.join(destination_folder, 'B')
+    destination_folder_path = os.path.join(destination_folder, source_file_name)
     os.makedirs(destination_folder_path, exist_ok=True)
 
     # 复制A文件到B文件夹中
@@ -30,7 +30,7 @@ def copy_assets(source_file_path, destination_folder):
 # 测试代码
 if __name__ == "__main__":
     # 替换为A文件的绝对地址
-    source_file_path = "/path/to/A/file.txt"
+    source_file_path = "C:/Users/YW/Documents/nutcloud/noteVault/物理教学/教案/万有引力与宇宙航行/万有引力_quarto.qmd" # "/path/to/A/file.txt"
     # 替换为指定地址
-    destination_folder = "/path/to/destination/folder"
+    destination_folder = "C:/Users/YW\Desktop/新建文件夹" # "/path/to/destination/folder"
     copy_assets(source_file_path, destination_folder)
