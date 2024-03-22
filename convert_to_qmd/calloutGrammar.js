@@ -3,8 +3,7 @@ const segmentSelect = require("./selectFun.js");
 module.exports = { callConvertFull: callConvertFull };
 
 function callConvertFull(fullText) {
-  // const regex = /^[\t ]*> *?\[!(.+)\][\+\-]{0,1}(.*)\n((?:>.*\n)*)/gm;
-  const regex = /^[\t ]*> *?\[!(.+)\]([\+\-]{0,1})(.*)\n((?:>.*\n)*)/gm;
+  const regex = /^[\t ]*> *?\[!(.+)\]([\+\-]{0,1})(.*)\n((?:[\t ]*>.*\n)*)/gm;
   return segmentSelect(fullText, regex, callConvertPart);
   // return callConvertPart(regex.exec(fullText));
 }
@@ -24,7 +23,7 @@ function callConvertPart(matchArr) {
   }
 
 
-  const regex = /^>(.*)$/gm; // 多行模式标志/m来匹配每一行的开头，而不是整个文本的开头
+  const regex = /^[\t ]*>(.*)$/gm; // 多行模式标志/m来匹配每一行的开头，而不是整个文本的开头
   let match;
   while ((match = regex.exec(calloutText)) !== null) {
     contentArr.push(match[1].trim()); // 使用索引1获取捕获组的内容
@@ -56,6 +55,7 @@ function callConvertPart(matchArr) {
   }
 
   const convertedTotal = `::: {${convertedHead}}\n${convertedText}\n:::\n`
+
   return convertedTotal;
 }
 

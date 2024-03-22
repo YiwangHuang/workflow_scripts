@@ -4,9 +4,9 @@
 > This is a callout with a title.
 > Text
 
-> [!TIP]+ Tip with Title2
-> This is a callout with a title.
-> Text
+    > [!TIP]+ Tip with Title2
+    > This is a callout with a title.
+    > Text
 
 > [!Info]+ Tip with Title2
 > This is a callout with a title.
