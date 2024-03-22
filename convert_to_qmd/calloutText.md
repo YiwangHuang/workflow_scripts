@@ -1,6 +1,6 @@
 
 
-> [!TIP]   
+> [!TIP] 
 > This is a callout with a title.
 > Text
 
